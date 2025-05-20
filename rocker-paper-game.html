@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock-Paper-Scissors</title>
 </head>
 <body>
     <div>
@@ -21,11 +21,18 @@
             computerMove =computerRandomMove();
             playGame('scissors')
         ">Scissors</button>
+        <!-- reset the score to 0 -->
+        <button onclick="score.lose=0; score.win=0; score.tie=0; alert('score was reset !!')">Rest Score</button>
     </div>
 
 
 
     <script>
+        const score = {
+            win:0,
+            lose:0,
+            tie:0
+        }
         // Math.random will give a random num between 0 & 1. if statement is the logic for computer move. return will return the final value 
         function computerRandomMove() {
             let randomNumber = Math.random()
@@ -48,41 +55,53 @@
 
             if(playerMove === 'rock'){
                     if(computerMove === 'rock'){
-                        result = 'it\'s a tie'
-                        alert(`u picked rock computer picked ${computerMove}. ${result} `)
-                    }else if(computerMove === "paper"){
-                        result = 'u lost'
-                        alert(`u picked rock computer picked ${computerMove}. ${result} `)
-                    }else{
+                        result = 'it\'s a tie';
+                        // score.tie++
+                        }else if(computerMove === "paper"){
+                        result = 'u lost';
+                        // score.lose++;
+                        }else{
                         result = 'u won';
-                        alert(`u picked rock computer picked ${computerMove}. ${result} `);
-                    }
+                        // score.win++
+                        }
             } 
             
             else if(playerMove === 'paper'){
                     if(computerMove === 'rock'){
                         result = 'u won'
-                        alert(`u picked paper computer picked ${computerMove}. ${result} `)
-                    }else if(computerMove === "scissors"){
-                        result = 'u lost'
-                        alert(`u picked paper computer picked ${computerMove}. ${result} `)
-                    }else{
+                        // score.win++
+                        }else if(computerMove === "scissors"){
+                        result = 'u lost';
+                        // score.lose++;
+                        }else{
                         result = 'it\'s a tie';
-                        alert(`u picked paper computer picked ${computerMove}. ${result} `);
-                    }
+                        // score.tie++
+                        }
             } 
             else{
                     if(computerMove === 'scissors'){
-                        result = 'it\'s a tie'
-                        alert(`u picked scissors computer picked ${computerMove}. ${result} `)
-                    }else if(computerMove === "rock"){
-                        result = 'u lost'
-                        alert(`u picked scissors computer picked ${computerMove}. ${result} `)
+                        result = 'it\'s a tie';
+                        // score.tie++
+                        }else if(computerMove === "rock"){
+                        result = 'u lost';
+                        // score.lose++;
                     }else{
                         result = 'u won';
-                        alert(`u picked scissors computer picked ${computerMove}. ${result} `);
+                        // score.win++
                     }
             } 
+
+            //check the result and update the score
+
+            if (result === 'u won') {
+                score.win++;
+            } else if( result === 'u lost') {
+                score.lose++;
+            }else{
+                score.tie++;
+            }
+
+            alert(`u picked ${playerMove} computer picked ${computerMove}. ${result} \n You won : ${score.win}, You lost : ${score.lose}, You tied : ${score.tie} `)
         }
     </script>
 </body>
