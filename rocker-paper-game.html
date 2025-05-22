@@ -33,6 +33,9 @@
             lose:0,
             tie:0
         }
+
+        console.log(localStorage.getItem('score'));
+        
         // Math.random will give a random num between 0 & 1. if statement is the logic for computer move. return will return the final value 
         function computerRandomMove() {
             let randomNumber = Math.random()
@@ -103,6 +106,8 @@
 
             alert(`u picked ${playerMove} computer picked ${computerMove}. ${result} \n You won : ${score.win}, You lost : ${score.lose}, You tied : ${score.tie} `)
         }
+        const gameData = JSON.stringify(score)
+        localStorage.setItem('score', JSON.stringify(score) )
     </script>
 </body>
 </html>
