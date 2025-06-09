@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.gameButton{
+    font-size: 15px;
+    padding: 20px 20px;
+    border-radius: 100%;
+    background-color: black;
+    border: 1px solid whitesmoke;
+}
+
+.gameButton:hover{
+    background-color: darkgray;
+}
+
+img{
+    width: 50px;
+}
+
+.js-result{
+    text-transform: capitalize;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.js-move{
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 20px;
+}

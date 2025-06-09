@@ -1,0 +1,83 @@
+  // Safely load score from localStorage or initialize it
+    let score = JSON.parse(localStorage.getItem('score')) || { win: 0, lose: 0, tie: 0 };
+    //storing in a function make it easier to call it behin the setItem and removeItem to get updated the score
+    updatedScore()
+    function updatedScore(){
+        document.querySelector('.js-score')
+        .innerHTML = `You won: ${score.win}, You lost: ${score.lose}, You tied: ${score.tie}`
+    }
+    
+    function resultElem(result){
+        document.querySelector('.js-result')
+        .innerHTML = result
+    }
+     function playerPCMove(playerMove, computerMove){
+      let emoji;
+      
+        document.querySelector('.js-move')
+        .innerHTML = `you 
+      <img src="rockpaperscisors/${playerMove}-emoji.png" alt="">
+      <img src="rockpaperscisors/${computerMove}-emoji.png" alt="">
+      computer`
+      };
+
+        
+    function computerRandomMove() {
+      const randomNumber = Math.random();
+      if (randomNumber < 1 / 3) return 'rock';
+      else if (randomNumber < 2 / 3) return 'paper';
+      else return 'scissors';
+    }
+
+    // to chekc is the code is runing
+    let isAutoPlaying = false;
+    //each interval has an id but we declare it inside the function to save the ide from the last use if it was inside the id will be updated each time we run the function
+    let intervalId;
+
+    function autoplay(){
+        if(!isAutoPlaying){
+            intervalId = setInterval(function (){
+            const playerMove = computerRandomMove()
+            playGame(playerMove)},1000)
+            isAutoPlaying = true;
+        } else{
+            //to stop the id
+            clearInterval(intervalId)
+            isAutoPlaying = false;
+        }
+    }
+
+    function playGame(playerMove) {
+        
+      const computerMove = computerRandomMove();
+      let result = '';
+
+      if (playerMove === computerMove) {
+        result = "it's a tie";
+        score.tie++;
+      } else if (
+        (playerMove === 'rock' && computerMove === 'scissors') ||
+        (playerMove === 'paper' && computerMove === 'rock') ||
+        (playerMove === 'scissors' && computerMove === 'paper')
+      ) {
+        result = 'you won';
+        score.win++;
+      } else {
+        result = 'you lost';
+        score.lose++;
+      }
+      resultElem(result);
+      playerPCMove(playerMove, computerMove);
+      // Save updated score to localStorage
+      localStorage.setItem('score', JSON.stringify(score));
+      updatedScore()
+      console.log(`You picked ${playerMove}, computer picked ${computerMove}. ${result}
+`);
+    }
+
+    function resetScore() {
+      score = { win: 0, lose: 0, tie: 0 };
+      localStorage.removeItem('score');
+      updatedScore()
+      alert('Score was reset!');
+    }
