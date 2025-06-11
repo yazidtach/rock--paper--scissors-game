@@ -46,26 +46,28 @@
             isAutoPlaying = false;
         }
     }
-    const rockButton = document.querySelector('.js-rock-button')
-      rockButton.addEventListener('click', ()=> {playGame('rock')})
-      rockButton.addEventListener('keydown',(event)=>{
-        if(event.key ==='r'){
-          console.log('it\'s working');
-          
+      const rockButton = document.querySelector('.js-rock-button')
+        rockButton.addEventListener('click', ()=> {playGame('rock')})
+      const paperButton = document.querySelector('.js-paper-button')
+        paperButton.addEventListener('click', ()=> {playGame('paper')})
+      
+      
+      const scissorsButton = document.querySelector('.js-scissors-button')
+        scissorsButton.addEventListener('click', ()=> {playGame('scissors')})
+
+        // playing the game by pressing buttons
+      document.body.addEventListener('keydown',(event)=>{
+        if(event.key ==='r' || event.key === 'R'){
           playGame('rock')
-        }
+        } 
+        else if(event.key ==='p' ){
+          playGame('paper')}
+        else if(event.key ==='s' ){
+          playGame('scissors')}
+        else alert('u can only use r for rock, p for paper and s for scissors')
       })
-       document.body.addEventListener('keydown',(event)=>{
-        console.log(event.key)
-        console.log('the key down is working')
-       })
-    const paperButton = document.querySelector('.js-paper-button')
-      paperButton.addEventListener('click', ()=> {playGame('paper')})
-
-
-    const scissorsButton = document.querySelector('.js-scissors-button')
-      scissorsButton.addEventListener('click', ()=> {playGame('scissors')})
-    function playGame(playerMove) {
+       
+      function playGame(playerMove) {
         
       const computerMove = computerRandomMove();
       let result = '';
