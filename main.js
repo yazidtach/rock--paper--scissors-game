@@ -46,7 +46,25 @@
             isAutoPlaying = false;
         }
     }
+    const rockButton = document.querySelector('.js-rock-button')
+      rockButton.addEventListener('click', ()=> {playGame('rock')})
+      rockButton.addEventListener('keydown',(event)=>{
+        if(event.key ==='r'){
+          console.log('it\'s working');
+          
+          playGame('rock')
+        }
+      })
+       document.body.addEventListener('keydown',(event)=>{
+        console.log(event.key)
+        console.log('the key down is working')
+       })
+    const paperButton = document.querySelector('.js-paper-button')
+      paperButton.addEventListener('click', ()=> {playGame('paper')})
 
+
+    const scissorsButton = document.querySelector('.js-scissors-button')
+      scissorsButton.addEventListener('click', ()=> {playGame('scissors')})
     function playGame(playerMove) {
         
       const computerMove = computerRandomMove();
