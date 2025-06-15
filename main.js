@@ -33,19 +33,29 @@
     let isAutoPlaying = false;
     //each interval has an id but we declare it inside the function to save the ide from the last use if it was inside the id will be updated each time we run the function
     let intervalId;
-
     function autoplay(){
-        if(!isAutoPlaying){
-            intervalId = setInterval(function (){
-            const playerMove = computerRandomMove()
-            playGame(playerMove)},1000)
-            isAutoPlaying = true;
+      if(!isAutoPlaying){
+        intervalId = setInterval(function (){
+          const playerMove = computerRandomMove()
+          playGame(playerMove)},1000)
+          isAutoPlaying = true;
         } else{
-            //to stop the id
-            clearInterval(intervalId)
-            isAutoPlaying = false;
+          //to stop the id
+          clearInterval(intervalId)
+          isAutoPlaying = false;
         }
-    }
+      }
+
+
+      
+      document.querySelector('.js-autoPlay').addEventListener('click',()=>{ autoplay() })
+      document.querySelector('.js-autoPlay').addEventListener('click',()=>{  })
+      
+      
+      
+      
+      
+      
       const rockButton = document.querySelector('.js-rock-button')
         rockButton.addEventListener('click', ()=> {playGame('rock')})
       const paperButton = document.querySelector('.js-paper-button')
