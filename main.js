@@ -38,21 +38,23 @@
         intervalId = setInterval(function (){
           const playerMove = computerRandomMove()
           playGame(playerMove)},1000)
-          isAutoPlaying = true;
+          isAutoPlaying = true;document.querySelector('.js-autoPlay').innerHTML = 'Stop playing'
         } else{
           //to stop the id
           clearInterval(intervalId)
-          isAutoPlaying = false;
+          isAutoPlaying = false; 
+          document.querySelector('.js-autoPlay').innerHTML = 'Auto play'
         }
       }
 
-
       
+     
+      // autoPlay function using addevent listener 
       document.querySelector('.js-autoPlay').addEventListener('click',()=>{ autoplay() })
-      document.querySelector('.js-autoPlay').addEventListener('click',()=>{  })
-      
-      
-      
+
+      // auto play when typing a 
+
+
       
       
       
@@ -65,23 +67,11 @@
       const scissorsButton = document.querySelector('.js-scissors-button')
         scissorsButton.addEventListener('click', ()=> {playGame('scissors')})
 
-        // playing the game by pressing buttons
-      document.body.addEventListener('keydown',(event)=>{
-        if(event.key ==='r' || event.key === 'R'){
-          playGame('rock')
-        } 
-        else if(event.key ==='p' ){
-          playGame('paper')}
-        else if(event.key ==='s' ){
-          playGame('scissors')}
-        else alert('u can only use r for rock, p for paper and s for scissors')
-      })
-       
-      function playGame(playerMove) {
-        
-      const computerMove = computerRandomMove();
+        function playGame(playerMove) {
+          
+          const computerMove = computerRandomMove();
       let result = '';
-
+      
       if (playerMove === computerMove) {
         result = "it's a tie";
         score.tie++;
@@ -102,8 +92,16 @@
       localStorage.setItem('score', JSON.stringify(score));
       updatedScore()
       console.log(`You picked ${playerMove}, computer picked ${computerMove}. ${result}
-`);
+        `);
     }
+    
+    document.querySelector('.js-rest-score').addEventListener('click',()=>{
+        document.querySelector('.js-reset-confirm') = ` are u sure u wanna reset score : 
+        <button class = "yes" >Yes</button>
+        <button class = "no" >No</button>
+        `
+      resetScore();
+    })
 
     function resetScore() {
       score = { win: 0, lose: 0, tie: 0 };
@@ -111,3 +109,12 @@
       updatedScore()
       alert('Score was reset!');
     }
+    
+    // playing the game by pressing buttons
+  document.body.addEventListener('keydown',(event)=>{
+    if(event.key ==='r' || event.key === 'R') playGame('rock')
+    else if(event.key ==='p' ) playGame('paper')
+    else if(event.key ==='s' ) playGame('scissors')
+    else if(event.key === 'a') autoplay()
+    else if (event.key === 'Backspace') (resetScore())
+    })
