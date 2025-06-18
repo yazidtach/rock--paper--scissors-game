@@ -96,25 +96,39 @@
     }
     
     document.querySelector('.js-rest-score').addEventListener('click',()=>{
-        document.querySelector('.js-reset-confirm') = ` are u sure u wanna reset score : 
-        <button class = "yes" >Yes</button>
-        <button class = "no" >No</button>
-        `
-      resetScore();
+      confirmationReset()
     })
 
+    function confirmationReset(){
+       document.querySelector('.js-reset-confirm').innerHTML = ` are u sure u wanna reset score : 
+        <button class="yes" >Yes</button>
+        <button class="no" >No</button>
+        `
+    
+
+    document.querySelector('.yes').addEventListener('click',()=>{
+      resetScore()
+      hideRestMsg()
+    })
+    
+    document.querySelector('.no').addEventListener('click',()=>{
+      hideRestMsg()
+    })
+}
     function resetScore() {
       score = { win: 0, lose: 0, tie: 0 };
       localStorage.removeItem('score');
       updatedScore()
       alert('Score was reset!');
     }
-    
+     function hideRestMsg(){
+      document.querySelector('.js-reset-confirm').innerHTML = ''
+     }
     // playing the game by pressing buttons
   document.body.addEventListener('keydown',(event)=>{
     if(event.key ==='r' || event.key === 'R') playGame('rock')
     else if(event.key ==='p' ) playGame('paper')
     else if(event.key ==='s' ) playGame('scissors')
     else if(event.key === 'a') autoplay()
-    else if (event.key === 'Backspace') (resetScore())
+    else if (event.key === 'Backspace') (confirmationReset())
     })
